@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState , useEffect} from 'react'
 import{ethers} from 'ethers'
 
 
@@ -9,6 +9,11 @@ const WalletCard = () => {
 	const [defaultAccount, setDefaultAccount] = useState(null);
 	const [userBalance, setUserBalance] = useState(null);
 	const [connButtonText, setConnButtonText] = useState('Connect Wallet');
+	
+	useEffect(() => {
+setConnButtonText("Connect Wallet");
+		
+	  }, []);
     const connectWalletHandler = () => {
         if (window.ethereum)
 

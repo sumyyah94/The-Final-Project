@@ -6,6 +6,7 @@ import Homepage from "./Pages/Homepage";
 import CoinPage from "./Pages/CoinPage";
 import Transaction from './Pages/Transaction'
 import { makeStyles} from "@material-ui/core";
+import Alert from './Components/Alert';
 
   
 
@@ -31,6 +32,7 @@ function App() {
     <Route   path="/transaction" element={<Transaction/> } exact  /> 
     </Routes>
     </div>
+    <Alert/>
     </BrowserRouter>
     
   )

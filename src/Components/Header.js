@@ -4,6 +4,8 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { CryptoState } from '../CryptoContext';
 import WalletCard from './WalletCard ';
+import AuthModal from './Authentication/AuthModal'
+import UserSidebar from './Authentication/UserSidebar';
 
 
 const useStyles=makeStyles(()=>({
@@ -19,7 +21,7 @@ const useStyles=makeStyles(()=>({
 const Header = () => {
     const classes = useStyles()
     const navigate = useNavigate()
-    const { currency , setCurrency} = CryptoState ();
+    const { currency , setCurrency , user } = CryptoState ();
     console.log(currency);
     const darkTheme = createTheme ({
         palette:{ primary:{
@@ -72,6 +74,7 @@ onChange={(e) => setCurrency(e.target.value)}
 
 
 </Select>
+{user ? <UserSidebar/> : <AuthModal />}
 </Toolbar>
 </Container>
 

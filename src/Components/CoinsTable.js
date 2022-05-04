@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Pagination from "@material-ui/lab/Pagination";
 import {
@@ -16,8 +16,6 @@ import {
   Table,
   Paper,
 } from "@material-ui/core";
-import axios from "axios";
-import { CoinList } from "../config/api";
 import { useNavigate } from "react-router-dom";
 import { CryptoState } from "../CryptoContext";
 
@@ -26,12 +24,10 @@ export function numberWithCommas(x) {
 }
 
 export default function CoinsTable() {
-  const [coins, setCoins] = useState([]);
-  const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
 
-  const { currency, symbol } = CryptoState();
+  const { symbol, coins, loading } = CryptoState();
 
   const useStyles = makeStyles({
     row: {
@@ -44,7 +40,7 @@ export default function CoinsTable() {
     },
     pagination: {
       "& .MuiPaginationItem-root": {
-        color: "#808000",
+        color: "#808080",
       },
     },
   });
@@ -55,25 +51,11 @@ export default function CoinsTable() {
   const darkTheme = createTheme({
     palette: {
       primary: {
-        main: "#808080`",
+        main: "#fff",
       },
       type: "dark",
     },
   });
-
-  const fetchCoins = async () => {
-    setLoading(true);
-    const { data } = await axios.get(CoinList(currency));
-    console.log(data);
-
-    setCoins(data);
-    setLoading(false);
-  };
-
-  useEffect(() => {
-    fetchCoins();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currency]);
 
   const handleSearch = () => {
     return coins.filter(
@@ -100,10 +82,10 @@ export default function CoinsTable() {
         />
         <TableContainer component={Paper}>
           {loading ? (
-            <LinearProgress style={{ backgroundColor: "#f5fffa" }} />
+            <LinearProgress style={{ backgroundColor: "#808080" }} />
           ) : (
             <Table aria-label="simple table">
-              <TableHead style={{ backgroundColor: "#a9a9a9" }}>
+              <TableHead style={{ backgroundColor: "#D9D9D9" }}>
                 <TableRow>
                   {["Coin", "Price", "24h Change", "Market Cap"].map((head) => (
                     <TableCell
@@ -113,7 +95,7 @@ export default function CoinsTable() {
                         fontFamily: "Montserrat",
                       }}
                       key={head}
-                      align={head === "Coin" ? "" : "right"}
+                      align={head === "Coin" ? "left" : "right"}
                     >
                       {head}
                     </TableCell>
@@ -157,7 +139,7 @@ export default function CoinsTable() {
                             >
                               {row.symbol}
                             </span>
-                            <span style={{ color: "#f0ffff" }}>
+                            <span style={{ color: "darkgrey" }}>
                               {row.name}
                             </span>
                           </div>
@@ -193,7 +175,7 @@ export default function CoinsTable() {
 
         {/* Comes from @material-ui/lab */}
         <Pagination
-          count={(handleSearch()?.length / 10).toFixed(0)}
+          count={parseInt((handleSearch()?.length / 10).toFixed(0))}
           style={{
             padding: 20,
             width: "100%",

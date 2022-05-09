@@ -2,6 +2,17 @@ import { useState } from "react";
 import { ethers } from "ethers";
 import ErrorMessage from "./ErrorMessage";
 import TxList from "./TxList";
+import {TextField,Button } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    '& .MuiTextField-root': {
+      margin: theme.spacing(1),
+      width: '25ch',
+    },
+  },
+}));
 
 const startPayment = async ({ setError, setTxs, ether, addr }) => {
   try {
@@ -25,12 +36,16 @@ const startPayment = async ({ setError, setTxs, ether, addr }) => {
 };
 
 export default function Transaction() {
+
+  const classes = useStyles();
+
   const [error, setError] = useState();
   const [txs, setTxs] = useState([]);
  
  
   
   const handleSubmit = async (e) => {
+    console.log('here');
     e.preventDefault();
     const data = new FormData(e.target);
     setError();
@@ -43,45 +58,21 @@ export default function Transaction() {
   };
 
   return (
-    <form className="m-4" onSubmit={handleSubmit}>
-      <div className="credit-card w-full lg:w-1/2 sm:w-auto shadow-lg mx-auto rounded-xl bg-white">
-        <main className="mt-4 p-4">
-          <h1 className="text-xl font-semibold text-gray-700 text-center">
-            Send ETH payment
-          </h1>
-          <div className="">
-            <div className="my-3">
-              <input
-                type="text"
-                name="addr"
-                className="input input-bordered block w-full focus:ring focus:outline-none"
-                placeholder="Recipient Address"
-              />
-            </div>
-            <div className="my-3">
-              <input
-                name="ether"
-                type="text"
-                className="input input-bordered block w-full focus:ring focus:outline-none"
-                placeholder="Amount in ETH"
-              />
-            </div>
-          </div>
-        </main>
-        <footer className="p-4">
+    <>
+    <form className={classes.root} noValidate autoComplete="off" onSubmit={handleSubmit}>
+    <h1 >
+    Send ETH payment
+  </h1>
+  <TextField id="standard-basic"  name="addr" label="Recipient Address" />
+  <TextField id="standard-basic" name="ether" label="Amount in ETH"  />
+  <Button variant="contained" color="primary" type="submit" >
+  Transfer
+</Button>
+  <ErrorMessage message={error} />
+  <TxList txs={txs} />
 
-          <button
-            type="submit"
-            className="btn btn-primary submit-button focus:ring focus:outline-none w-full"
-          >
-            Pay now
-          </button>
-
-          <ErrorMessage message={error} />
-          <TxList txs={txs} />
-        </footer>
-      </div>
     </form>
+    </>
     );
   }
 

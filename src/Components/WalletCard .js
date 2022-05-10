@@ -5,16 +5,16 @@ import{ethers} from 'ethers'
 
 const WalletCard = () => {
    
-	const [errorMessage, setErrorMessage] = useState(null);
+	//const [errorMessage, setErrorMessage] = useState(null);
 	const [defaultAccount, setDefaultAccount] = useState(null);
 	const [userBalance, setUserBalance] = useState(null);
-	const [connButtonText, setConnButtonText] = useState('Connect Wallet');
+//const [connButtonText, setConnButtonText] = useState('Connect Wallet');//
 	
 	useEffect(() => {
-setConnButtonText("Connect Wallet");
+//setConnButtonText("Connect Wallet");
 		
 	  }, []);
-    const connectWalletHandler = () => {
+    /*const connectWalletHandler = () => {
         if (window.ethereum)
 
         {
@@ -25,7 +25,7 @@ setConnButtonText("Connect Wallet");
         }else{
                 setErrorMessage('Please install MetaMask browser extension to interact');
             }
-        }
+        }*/
     
 
 const accountChangedHandler = (newAccount) => {
@@ -57,16 +57,28 @@ window.ethereum.on('chainChanged', chainChangedHandler);
 			  color:"darkgray",
 			  textTransform:"capitalize",
 			  fontFamily:"Montserrat",
-		  }}> {"Connection To Your MetaMask "} </h4>
+		  }}> {"Connection To Your Account "} </h4>
 
-			<button onClick={connectWalletHandler}>{connButtonText}</button>
+			{/*<button onClick={connectWalletHandler}>{connButtonText}</button>*/}
 			<div className='accountDisplay'>
-				<h3>Address: {defaultAccount}</h3>
+				<h3 style={{
+					textAlign: "center",
+					  color:"darkgray",
+					  textTransform:"capitalize",
+					  fontFamily:"Montserrat",
+					  margin:"20px",
+				  }}>Address: {defaultAccount}</h3>
 			</div>
 			<div className='balanceDisplay'>
-				<h3>Balance: {userBalance}</h3>
+				<h3 style={{
+					textAlign: "center",
+					  color:"darkgray",
+					  textTransform:"capitalize",
+					  fontFamily:"Montserrat",
+					  margin:"20px",
+				  }}>Balance: {userBalance}</h3>
 			</div>
-			{errorMessage}
+			{/*{errorMessage}*/}
 		</div>
 		
 	)

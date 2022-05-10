@@ -1,0 +1,26 @@
+.container{
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+   
+
+
+}
+
+.container1{
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    flex-direction: column;
+    
+
+}
+.space{
+    margin: 50px;
+}

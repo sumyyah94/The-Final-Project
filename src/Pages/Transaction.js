@@ -4,13 +4,21 @@ import ErrorMessage from "./ErrorMessage";
 import TxList from "./TxList";
 import {TextField,Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-
+import WalletCard from '../Components/WalletCard ';
+import "./transaction.css"
 const useStyles = makeStyles((theme) => ({
-  root: {
-    '& .MuiTextField-root': {
-      margin: theme.spacing(1),
-      width: '25ch',
-    },
+  root : {
+   
+    fontSize:30,
+    '& .MuiOutlinedInput-root': {  // - The Input-root, inside the TextField-root
+      
+      '&:hover fieldset': {
+          borderColor: 'gray', // - Set the Input border when parent has :hover
+      },
+      '&.Mui-focused fieldset': { // - Set the Input border when parent is focused 
+          borderColor: 'green',
+      },
+  },
   },
 }));
 
@@ -58,21 +66,31 @@ export default function Transaction() {
   };
 
   return (
-    <>
+    <div className="container">
     <form className={classes.root} noValidate autoComplete="off" onSubmit={handleSubmit}>
-    <h1 >
-    Send ETH payment
+    <h1 style={{
+			textAlign: "center",
+			  color:"darkgray",
+			  textTransform:"capitalize",
+			  fontFamily:"Montserrat",
+        margin:"20px",
+		  }}>
+    Send Ethers
   </h1>
-  <TextField id="standard-basic"  name="addr" label="Recipient Address" />
-  <TextField id="standard-basic" name="ether" label="Amount in ETH"  />
-  <Button variant="contained" color="primary" type="submit" >
+  <WalletCard/>
+<div className="container1">
+  <TextField className="space" fullWidth inputProps={{style: {fontSize: 30}}} variant="outlined" id="standard-basic"  name="addr" label="Recipient Address" />
+  <TextField  fullWidth className="space" inputProps={{style: {fontSize: 30}}} id="standard-basic" name="ether" label="Amount in ETH"  />
+  <Button  className="space" variant="contained" color="primary" type="submit" >
   Transfer
 </Button>
+
   <ErrorMessage message={error} />
   <TxList txs={txs} />
-
+  </div>
+  
     </form>
-    </>
+    </div>
     );
   }
 

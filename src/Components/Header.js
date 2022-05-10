@@ -1,9 +1,8 @@
-import { AppBar, Container,  createTheme,  MenuItem,  Select,  Toolbar, Typography ,ThemeProvider } from '@material-ui/core'
+import { AppBar, Container,  createTheme,  MenuItem,  Select,  Toolbar, Typography ,ThemeProvider, Button } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { CryptoState } from '../CryptoContext';
-import WalletCard from './WalletCard ';
 import AuthModal from './Authentication/AuthModal'
 import UserSidebar from './Authentication/UserSidebar';
 
@@ -17,6 +16,7 @@ const useStyles=makeStyles(()=>({
         cursor:"pointer",
 
     },
+    
 }));
 const Header = () => {
     const classes = useStyles()
@@ -47,16 +47,12 @@ variant='h6'>
 
 Crypto Tracker</Typography>
 
-<input type = "button" onClick ={() => navigate(`/Transaction`)} />
-
-<Typography>
 
 
 
 
+<Button  onClick ={() => navigate(`/Transaction`)} />
 
-<WalletCard/>
-</Typography> 
 
 
 

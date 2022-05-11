@@ -51,7 +51,9 @@ Crypto Tracker</Typography>
 
 
 
-<Button  onClick ={() => navigate(`/Transaction`)} />
+<Button variant="contained" onClick ={() => navigate(`/Transaction`)} style={{width:100, height:40, marginRight:15,}} >
+Transfer
+</Button>
 
 
 

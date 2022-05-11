@@ -8,18 +8,16 @@ import WalletCard from '../Components/WalletCard ';
 import "./transaction.css"
 const useStyles = makeStyles((theme) => ({
   root : {
-   
-    fontSize:30,
-    '& .MuiOutlinedInput-root': {  // - The Input-root, inside the TextField-root
       
-      '&:hover fieldset': {
-          borderColor: 'gray', // - Set the Input border when parent has :hover
-      },
-      '&.Mui-focused fieldset': { // - Set the Input border when parent is focused 
-          borderColor: 'green',
-      },
-  },
-  },
+      fontSize:30,
+      margin:"20px",
+    },
+    button : {
+     
+      fontSize:20,
+      margin:"20px",
+    },
+
 }));
 
 const startPayment = async ({ setError, setTxs, ether, addr }) => {
@@ -67,7 +65,7 @@ export default function Transaction() {
 
   return (
     <div className="container">
-    <form className={classes.root} noValidate autoComplete="off" onSubmit={handleSubmit}>
+    <form  noValidate autoComplete="off" onSubmit={handleSubmit}>
     <h1 style={{
 			textAlign: "center",
 			  color:"darkgray",
@@ -79,9 +77,11 @@ export default function Transaction() {
   </h1>
   <WalletCard/>
 <div className="container1">
-  <TextField className="space" fullWidth inputProps={{style: {fontSize: 30}}} variant="outlined" id="standard-basic"  name="addr" label="Recipient Address" />
-  <TextField  fullWidth className="space" inputProps={{style: {fontSize: 30}}} id="standard-basic" name="ether" label="Amount in ETH"  />
-  <Button  className="space" variant="contained" color="primary" type="submit" >
+  <TextField fullWidth  inputProps={{style: {fontSize: 30}}}
+  className={classes.root}  id="standard-basic"  name="addr" label="Recipient Address" />
+  <TextField  fullWidth  inputProps={{style: {fontSize: 30}}}
+  className={classes.root} id="standard-basic" name="ether" label="Amount in ETH"  />
+  <Button className={classes.button}  variant="contained" color="primary" type="submit" >
   Transfer
 </Button>
 
